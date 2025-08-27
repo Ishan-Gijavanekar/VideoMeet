@@ -77,6 +77,19 @@ const login = async (req, res) => {
     }
 }
 
+const logout = async(req, res) => {
+    try {
+        res.clearCookie("token");
+        res.status(200)
+        .json({
+            message: "Logout successful"
+        })
+    } catch (error) {
+        console.log(`Error in logout controller: ${error}`);
+        res.status(500).json({message: "Internal server error"});
+    }
+}
+
 const getUser = async(req, res) => {
     try {
         const id = req.user.userId;
@@ -153,4 +166,4 @@ const deleteUser = async(req, res) => {
     }
 }
 
-export {register, login, getUser, getUserById, updateUser, deleteUser};
+export {register, login, getUser, getUserById, updateUser, deleteUser, logout};
